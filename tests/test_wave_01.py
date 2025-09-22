@@ -120,7 +120,7 @@ def test_adds_movie_to_user_watchlist():
     assert updated_data["watchlist"][0]["genre"] == GENRE_1
     assert updated_data["watchlist"][0]["rating"] == RATING_1
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_adds_movie_to_non_empty_user_watchlist():
     # Arrange
     movie = {
