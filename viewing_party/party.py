@@ -9,15 +9,10 @@ def create_movie(title, genre, rating):
     movie["genre"] = genre
     movie["rating"] = rating
 
- 
-    
     return movie
 
 def add_to_watched(user_data, movie):
-
     user_data["watched"].append(movie)
-    
-
     return user_data
 
 
