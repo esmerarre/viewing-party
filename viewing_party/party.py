@@ -20,7 +20,25 @@ def add_to_watchlist(user_data, movie):
     return user_data
 
 def watch_movie(user_data, title):
-
+    watch_list = user_data["watchlist"]
+    print(watch_list)
+    if len(watch_list) > 0:
+        print("length", len(watch_list))
+        movie_dict = watch_list[0]
+        print(movie_dict)
+        if title == movie_dict["title"]:
+            print("yesy")
+            watch_list.remove(movie_dict)
+            print(watch_list)
+        #     # remove the movie(the element of the list, including title,genre etc..)
+        #         # find the title which is a value under the key "title"
+        #     # add to "watched"(key of the user disctionary)
+            user_data["watched"].append(movie_dict)
+            print(user_data)
+        else:
+            print("wrong")
+    
+        return user_data
 
 #Create a function named watch_movie. This function should...
 # take two parameters: user_data, title
