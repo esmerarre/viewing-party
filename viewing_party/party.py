@@ -68,8 +68,9 @@ def get_unique_watched(user_data):
     friends_list = user_data["friends"]
     
     for movie_dict in watched_list:
-        for movie_dict_friend in friends_list:
-            if movie_dict.get("title") != movie_dict_friend.get("title"):
+        for index in range(0,len(friends_list)):
+
+            if movie_dict.get("title") != friends_list[index]["watched"].get("title"):
                 not_watched.append(movie_dict)
 
     return not_watched
