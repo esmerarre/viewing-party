@@ -38,8 +38,42 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
+def get_unique_watched(user_data):
+    # user data:{'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
+    # 'friends': [{...}, {...}]}
+    # Compare watched/titles != friends/titles: add to answer dict
+    # return a list of dictionaries(movie_dict)
 
-        
+
+    # # USER_DATA_3["friends"] =  [
+    #     {
+    #         "watched": [
+    #             FANTASY_1,
+    #             FANTASY_3,
+    #             FANTASY_4,
+    #             HORROR_1,
+    #         ]
+    #     },
+    #     {
+    #         "watched": [
+    #             FANTASY_1,
+    #             ACTION_1,
+    #             INTRIGUE_1,
+    #             INTRIGUE_3,
+    #         ]
+    #     }
+    # ]
+
+    watched_list = user_data["watched"]
+    friends_list = user_data["friends"]
+    
+    for movie_dict in watched_list:
+        if type(movie_dict) is dict: # To avoid throw an error
+            if movie_dict.get("title") == :
+                watched_list.remove(movie_dict)
+                user_data["watched"].append(movie_dict)
+
+    return user_data
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
