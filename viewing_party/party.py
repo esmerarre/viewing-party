@@ -22,12 +22,13 @@ def add_to_watchlist(user_data, movie):
 def watch_movie(user_data, title):
     watch_list = user_data["watchlist"]
     
-    if len(watch_list) > 0:
-        movie_dict = watch_list[0]
-        if title == movie_dict["title"]:
-            watch_list.remove(movie_dict)
-            user_data["watched"].append(movie_dict)
-        return user_data
+    for movie_dict in watch_list:
+        if type(movie_dict) is dict: # To avoid throw an error
+            if movie_dict.get("title") == title:
+                watch_list.remove(movie_dict)
+                user_data["watched"].append(movie_dict)
+
+    return user_data
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
