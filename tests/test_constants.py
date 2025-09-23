@@ -75,7 +75,8 @@ USER_DATA_2 = {
         ACTION_1, 
         INTRIGUE_1, 
         INTRIGUE_2
-        ],    
+        ],
+    "firends":     
 }
 
 USER_DATA_2b = {

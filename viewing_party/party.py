@@ -63,17 +63,16 @@ def get_unique_watched(user_data):
     #         ]
     #     }
     # ]
-
+    not_watched = []
     watched_list = user_data["watched"]
     friends_list = user_data["friends"]
     
     for movie_dict in watched_list:
-        if type(movie_dict) is dict: # To avoid throw an error
-            if movie_dict.get("title") == :
-                watched_list.remove(movie_dict)
-                user_data["watched"].append(movie_dict)
+        for movie_dict_friend in friends_list:
+            if movie_dict.get("title") != movie_dict_friend.get("title"):
+                not_watched.append(movie_dict)
 
-    return user_data
+    return not_watched
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
