@@ -39,41 +39,22 @@ def watch_movie(user_data, title):
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
 def get_unique_watched(user_data):
-    # user data:{'watched': [{...}, {...}, {...}, {...}, {...}, {...}], 
-    # 'friends': [{...}, {...}]}
-    # Compare watched/titles != friends/titles: add to answer dict
-    # return a list of dictionaries(movie_dict)
-
-
-    # # USER_DATA_3["friends"] =  [
-    #     {
-    #         "watched": [
-    #             FANTASY_1,
-    #             FANTASY_3,
-    #             FANTASY_4,
-    #             HORROR_1,
-    #         ]
-    #     },
-    #     {
-    #         "watched": [
-    #             FANTASY_1,
-    #             ACTION_1,
-    #             INTRIGUE_1,
-    #             INTRIGUE_3,
-    #         ]
-    #     }
-    # ]
     not_watched = []
+    friend_movie_titles = []
     watched_list = user_data["watched"]
     friends_list = user_data["friends"]
+
+    for index in friends_list:
+        list_of_movie_dict_friend = index["watched"]
+        for index in list_of_movie_dict_friend:
+            friend_movie_titles.append(index.get("title"))            
     
     for movie_dict in watched_list:
-        for index in range(0,len(friends_list)):
-
-            if movie_dict.get("title") != friends_list[index]["watched"].get("title"):
-                not_watched.append(movie_dict)
+        if movie_dict.get("title") not in friend_movie_titles:
+            not_watched.append(movie_dict)
 
     return not_watched
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
