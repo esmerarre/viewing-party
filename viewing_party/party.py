@@ -65,7 +65,7 @@ def get_most_watched_genre(user_data):
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
 # -----------------------------------------
-# Return user unwatched movie list of dictionary
+# Return user watched movie but none of freinds have watched list of dictionary
 def get_unique_watched(user_data):
     not_watched = []
     friend_movie_titles = []
@@ -109,56 +109,15 @@ def get_friends_unique_watched(user_data):
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-    user_watched_list = user_data["watched"]
-    friends_list = user_data["friends"]
     subscription_list = user_data["subscriptions"]
-    
-    user_movie_titles = []
-    friend_movie_titles = []
-    friends_unique = []
-    friend_host = []
     recommendation_list = []
-
-    # first condition
-    user_unwatched = get_unique_watched(user_data)
-    # second condition
-    friends_unique_watched = get_friends_unique_watched(user_data)
-    # third cndition
-    # The "host" of the movie is a service that is in the user's "subscriptions"
-
-    for friend_watched_dict in friends_list:
-        list_of_movie_dict_friend = friend_watched_dict["watched"]
-        for friend_movie_dict in list_of_movie_dict_friend:
-            friend_movie_titles.append(friend_movie_dict.get("title"))            
-            friend_host.append(friend_movie_dict.get("host"))
-            print(friend_host)
-            print(subscription_list)    
-
-    #for movie_dict in user_watched_list:
-        for movie_dict in user_unwatched:
-            if movie_dict in friends_unique_watched:
-            # if friend_host in subscription_list:
-                for host in friend_host:
-                        if host in subscription_list:
-                    #if movie_dict["host"] in friend_host:
-                            recommendation_list.append(movie_dict)
-
-        # if user_unwatched and friends_unique_watched in (friend_host, subscription_list):
-            
+    user_unwatched = get_friends_unique_watched(user_data)
+ 
+    for movie_dict in user_unwatched:
+        if movie_dict["host"] in subscription_list:
+            recommendation_list.append(movie_dict)
 
     return recommendation_list
-# [#HORROR_1 = {
-#     "title": MOVIE_TITLE_1,
-#     "genre": GENRE_1,
-#     "rating": RATING_1
-#     #"host" key here
-# }
-# ,
-# {FANTACY1... = {
-#     ...
-# }
-# ]
-
 
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
