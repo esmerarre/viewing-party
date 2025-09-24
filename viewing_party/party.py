@@ -123,3 +123,12 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
+def get_rec_from_favorites(user_data):
+    favorites_list = user_data["favorites"]
+    recommendation_list = []
+    friends_unwatched = get_unique_watched(user_data)
+    for movie_dict in friends_unwatched:
+        if movie_dict in favorites_list:
+            recommendation_list.append(movie_dict)
+
+    return recommendation_list
