@@ -55,9 +55,9 @@ def get_most_watched_genre(user_data):
     top_genre = None
     genre_freq = 0
 
-    for genres, freq in watched_genre_freq.items():
+    for genre, freq in watched_genre_freq.items():
         if freq > genre_freq:
-            top_genre = genres
+            top_genre = genre
             genre_freq = freq
     
     return top_genre
@@ -71,10 +71,10 @@ def get_unique_watched(user_data):
     watched_list = user_data["watched"]
     friends_list = user_data["friends"]
 
-    for index in friends_list:
-        list_of_movie_dict_friend = index["watched"]
-        for index in list_of_movie_dict_friend:
-            friend_movie_titles.append(index.get("title"))            
+    for friend_watched_dict in friends_list:
+        list_of_movie_dict_friend = friend_watched_dict["watched"]
+        for friend_movie_dict in list_of_movie_dict_friend:
+            friend_movie_titles.append(friend_movie_dict.get("title"))            
     
     for movie_dict in watched_list:
         if movie_dict.get("title") not in friend_movie_titles:
@@ -92,13 +92,10 @@ def get_friends_unique_watched(user_data):
     
     # Get user watched movie titles(list of string titles)
     for movie_dict in user_watched_list:
-        # e.g ['The Lord of the Functions: The Fellowship of the Function']
         user_movie_titles.append(movie_dict.get("title"))
-        #print(user_movie_titles)
 
     # friend is a dictionary of "watched" as key and a list of movie dictionaries as value
     for friend in friends_list:
-        print(friend)
         for friend_movie in friend["watched"]:
             title = friend_movie.get("title")
         
