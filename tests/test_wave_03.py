@@ -60,7 +60,7 @@ def test_friends_unique_movies_not_duplicated():
     # ****** Add assertions here to test that the correct movies are in friends_unique_movies **********
     # **************************************************************************************************
 
-@pytest.mark.skip()
+#@pytest.mark.skip()
 def test_friends_not_unique_movies():
     # Arrange
     amandas_data = {
