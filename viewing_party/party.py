@@ -82,6 +82,31 @@ def get_unique_watched(user_data):
 
     return not_watched
 
+# Determine which movies at least one of the user's friends have watched, but the user has not watched.
+def get_friends_unique_watched(user_data):
+    user_watched_list = user_data["watched"]
+    friends_list = user_data["friends"]
+    
+    user_movie_titles = []
+    friends_unique = []
+    
+    # Get user watched movie titles(list of string titles)
+    for movie_dict in user_watched_list:
+        # e.g ['The Lord of the Functions: The Fellowship of the Function']
+        user_movie_titles.append(movie_dict.get("title"))
+        #print(user_movie_titles)
+
+    # friend is a dictionary of "watched" as key and a list of movie dictionaries as value
+    for friend in friends_list:
+        print(friend)
+        for friend_movie in friend["watched"]:
+            title = friend_movie.get("title")
+        
+            if title not in user_movie_titles and friend_movie not in friends_unique:
+                friends_unique.append(friend_movie)
+
+    return friends_unique
+
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
