@@ -48,8 +48,8 @@ def get_watched_avg_rating(user_data):
 def get_most_watched_genre(user_data):
     watched_genre_freq = {}
     watched = user_data["watched"]
-    for movie in watched:
-        movie_genre = movie["genre"]
+    for movie_dict in watched:
+        movie_genre = movie_dict["genre"]
         watched_genre_freq[movie_genre] = watched_genre_freq.get(movie_genre, 0) +1
     
     top_genre = None
@@ -122,6 +122,16 @@ def get_available_recs(user_data):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+def get_new_rec_by_genre(user_data):
+    user_unwatched = get_friends_unique_watched(user_data)
+    recommendation_list = []
+    user_watched_most_genre = get_most_watched_genre(user_data)
+
+    for movie_dict in user_unwatched:
+        if movie_dict["genre"] == user_watched_most_genre:
+            recommendation_list.append(movie_dict)
+        
+    return recommendation_list
 
 def get_rec_from_favorites(user_data):
     favorites_list = user_data["favorites"]
