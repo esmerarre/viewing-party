@@ -48,6 +48,7 @@ def get_watched_avg_rating(user_data):
 def get_most_watched_genre(user_data):
     watched_genre_freq = {}
     watched = user_data["watched"]
+    
     for movie_dict in watched:
         movie_genre = movie_dict["genre"]
         watched_genre_freq[movie_genre] = watched_genre_freq.get(movie_genre, 0) +1
@@ -70,17 +71,17 @@ def get_most_watched_genre(user_data):
 def get_unique_watched(user_data):
     not_watched = []
     friend_movie_titles = []
-    watched_list = user_data["watched"]
+    user_watched_list = user_data["watched"]
     friends_list = user_data["friends"]
 
     for friend_watched_dict in friends_list:
         list_of_movie_dict_friend = friend_watched_dict["watched"]
-        
+
         friend_movie_titles.extend(
             get_user_watched_movie_titles(list_of_movie_dict_friend)
         )            
     
-    for movie_dict in watched_list:
+    for movie_dict in user_watched_list:
         if movie_dict.get("title") not in friend_movie_titles:
             not_watched.append(movie_dict)
 
@@ -96,12 +97,11 @@ def get_friends_unique_watched(user_data):
     
     user_movie_titles = get_user_watched_movie_titles(user_watched_list)
 
-    # friend is a dictionary of "watched" as key and a list of movie dictionaries as value
-    for friend in friends_list:
-        for friend_movie in friend["watched"]:
-            title = friend_movie.get("title")
-        
-            if title not in user_movie_titles and friend_movie not in friends_unique:
+    for friend_watched_dict in friends_list:
+        for friend_movie in friend_watched_dict["watched"]:
+            friend_movie_titles = friend_movie.get("title")
+    
+            if friend_movie_titles not in user_movie_titles and friend_movie not in friends_unique:
                 friends_unique.append(friend_movie)
 
     return friends_unique
