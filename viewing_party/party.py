@@ -91,10 +91,8 @@ def get_friends_unique_watched(user_data):
     user_movie_titles = []
     friends_unique = []
     
-    # Get user watched movie titles(list of string titles)
-    for movie_dict in user_watched_list:
-        user_movie_titles.append(movie_dict.get("title"))
-
+    user_movie_titles = get_user_watched_movie_titles(user_watched_list)
+    
     # friend is a dictionary of "watched" as key and a list of movie dictionaries as value
     for friend in friends_list:
         for friend_movie in friend["watched"]:
@@ -105,12 +103,19 @@ def get_friends_unique_watched(user_data):
 
     return friends_unique
 
+def get_user_watched_movie_titles(user_data):
+    user_movie_titles = []
+
+    for movie_dict in user_data:
+        user_movie_titles.append(movie_dict.get("title"))
+    
+    return user_movie_titles
 # -----------------------------------------
 # ------------- WAVE 4 --------------------
 # -----------------------------------------
 def get_available_recs(user_data):
-    subscription_list = user_data["subscriptions"]
     recommendation_list = []
+    subscription_list = user_data["subscriptions"]
     user_unwatched = get_friends_unique_watched(user_data)
  
     for movie_dict in user_unwatched:
@@ -123,9 +128,9 @@ def get_available_recs(user_data):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 def get_new_rec_by_genre(user_data):
-    user_unwatched = get_friends_unique_watched(user_data)
     recommendation_list = []
     user_watched_most_genre = get_most_watched_genre(user_data)
+    user_unwatched = get_friends_unique_watched(user_data)
 
     for movie_dict in user_unwatched:
         if movie_dict["genre"] == user_watched_most_genre:
@@ -134,9 +139,10 @@ def get_new_rec_by_genre(user_data):
     return recommendation_list
 
 def get_rec_from_favorites(user_data):
-    favorites_list = user_data["favorites"]
     recommendation_list = []
+    favorites_list = user_data["favorites"]
     friends_unwatched = get_unique_watched(user_data)
+
     for movie_dict in friends_unwatched:
         if movie_dict in favorites_list:
             recommendation_list.append(movie_dict)
