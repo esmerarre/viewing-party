@@ -89,11 +89,10 @@ def get_unique_watched(user_data):
 
 # Determine which movies at least one of the user's friends have watched, but the user has not watched.
 def get_friends_unique_watched(user_data):
+    friends_unique = []
+    user_movie_titles = []
     user_watched_list = user_data["watched"]
     friends_list = user_data["friends"]
-    
-    user_movie_titles = []
-    friends_unique = []
     
     user_movie_titles = get_user_watched_movie_titles(user_watched_list)
 
@@ -106,6 +105,7 @@ def get_friends_unique_watched(user_data):
 
     return friends_unique
 
+# helper function for Wave 3
 def get_user_watched_movie_titles(user_data):
     user_movie_titles = []
 
@@ -120,7 +120,7 @@ def get_available_recs(user_data):
     recommendation_list = []
     subscription_list = user_data["subscriptions"]
     user_unwatched = get_friends_unique_watched(user_data)
- 
+
     for movie_dict in user_unwatched:
         if movie_dict["host"] in subscription_list:
             recommendation_list.append(movie_dict)
